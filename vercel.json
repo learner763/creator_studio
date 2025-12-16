@@ -1,7 +1,7 @@
 {
     "version": 2,
     "routes": [
-        { "src": "/static/(.*)", "dest": "/frontend/build/$1" },
+        { "src": "/static/(.*)", "dest": "/staticfiles/$1" },
         { "src": "/(.*)", "dest": "api/index.py" }
     ]
 }

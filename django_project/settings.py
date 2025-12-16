@@ -49,10 +49,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "whitenoise.middleware.WhiteNoiseMiddleware"
 
 ]
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 ROOT_URLCONF = 'django_project.urls'
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
@@ -66,8 +64,8 @@ EMAIL_HOST_PASSWORD = "pzkq xrcj znlj pklz"
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        #'DIRS': [BASE_DIR / "frontend" / "build"],
-        'DIRS':[],
+        'DIRS': [BASE_DIR / "frontend" / "build"],
+        #'DIRS':[],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

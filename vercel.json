@@ -3,7 +3,7 @@
     "routes": [
       { "src": "/static/js/(.*)", "dest": "/frontend/build/static/js/$1" },
       { "src": "/static/css/(.*)", "dest": "/frontend/build/static/css/$1" },
-      { "src": "/static/(.*)", "dest": "/frontend/public/$1" }, 
+      { "src": "/static/(.*)", "dest": "staticfiles/$1" }, 
       { "src": "/(.*)", "dest": "api/index.py" }
     ]
   }

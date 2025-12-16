@@ -2,7 +2,7 @@
     "version": 2,
     "builds": [
       {
-        "src": "django_project/index.py",
+        "src": "api/index.py",
         "use": "@vercel/python"
       },
       {
@@ -17,7 +17,7 @@
       },
       {
         "src": "/(.*)",
-        "dest": "django_project/index.py"
+        "dest": "api/index.py"
       }
     ]
   }

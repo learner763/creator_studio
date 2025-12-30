@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Register</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     {% load static %}
 </head>
@@ -22,7 +22,7 @@
     }
     img{
         width: 439px;
-        height: 192px;
+        margin-top: 10px;
     }
     .child{
         display: flex;
@@ -142,6 +142,7 @@
         display: flex;
         justify-content: center;
         gap: 16px;
+        flex-wrap:wrap;
     }
     .sign_up_info_1,.sign_up_info_2{
         flex: 1;
@@ -158,6 +159,20 @@
         font-family: 'Inter';
         font-weight: 400;
         align-items: center;
+    }
+    select option{
+        color:black;
+    }
+    @media(max-width:900px)
+    {
+        img,.log_in_info,.child,.sign_up_info_1,.sign_up_info_2{
+            width: 220px;
+        }
+        
+        #fullname_input,#email_address_input,#confirm_password_input,#displayname_input,#residence,#password_input{
+            width: 185.52px;
+        }
+        
     }
 </style>
 <body>
@@ -179,7 +194,7 @@
                         font-family: Inter;
                         color: #CB102B;
                         margin-left: auto;
-                        cursor: pointer;" id="forgot">Forgot Password?</label>
+                        cursor: pointer;text-align: end;" id="forgot">Forgot Password?</label>
                     </div>
                 </div>
 
@@ -203,7 +218,7 @@
                     </div>
                     <div class="sign_up_info_2">
                         <label id="displayname">Display Name <label class="star">*</label></label>
-                        <input placeholder="Full Name" type="text" id="displayname_input">
+                        <input placeholder="Display Name" type="text" id="displayname_input">
                         <label id="residence_label">Country of Residence <label class="star">*</label></label>
                         <select id="residence" style="width: 100%;cursor: pointer;">
                             <option value="Anonymous">Country of Residence</option>
@@ -376,28 +391,7 @@
                         }
                     })
                 }    
-                else{
-                    dialog.innerHTML=''
-                    dialog.showModal();
-                    let message=document.createElement('label');
-                    message.innerHTML=`Please provide input to all fields.`
-                    message.style.color='white'
-                    let ok=document.createElement('button');
-                    ok.innerText='OK';
-                    ok.style.cursor='pointer';
-                    ok.style.backgroundColor='#CB102B';
-                    ok.style.color='white';
-                    ok.style.border='none';
-                    ok.style.borderRadius='5px';
-                    ok.style.padding='5px'
-                    ok.addEventListener('click',()=>
-                    {
-                        dialog.close();
-                    })
-                    dialog.appendChild(message);
-                    dialog.appendChild(document.createElement('p'));
-                    dialog.appendChild(ok);
-                }
+                
             }
             else{
                 if(fullname_input.value.length>0 && displayname_input.value.length>0 && confirm_password_input.value.length>0 && email_address_input.value.length>0 && password_input.value.length>0)
@@ -409,13 +403,15 @@
                         },
                         body:JSON.stringify({
                             "email":email_address_input.value,
-                            "password":confirm_password_input.value,
+                            "password":password_input.value,
+                            "confirmpassword":confirm_password_input.value,
                             "fullname":fullname_input.value,
                             "displayname":displayname_input.value,
                             "source":source_input.value,
                             "residence":residence.value,
                             "group":email_address_input.value,
-                            "logging_in":false
+                            "logging_in":false,
+
                         })
                     })
                     .then(responce=>responce.json())
@@ -453,29 +449,6 @@
                             dialog.appendChild(ok);
                         }
                     })
-                }
-                else if(confirm_password_input.value!==password_input.value)
-                {
-                    dialog.innerHTML=''
-                    dialog.showModal();
-                    let message=document.createElement('label');
-                    message.innerHTML=`Password and Confirm Password should have same values.`
-                    message.style.color='white'
-                    let ok=document.createElement('button');
-                    ok.innerText='OK';
-                    ok.style.cursor='pointer';
-                    ok.style.backgroundColor='#CB102B';
-                    ok.style.color='white';
-                    ok.style.border='none';
-                    ok.style.borderRadius='5px';
-                    ok.style.padding='5px'
-                    ok.addEventListener('click',()=>
-                    {
-                        dialog.close();
-                    })
-                    dialog.appendChild(message);
-                    dialog.appendChild(document.createElement('p'));
-                    dialog.appendChild(ok);
                 }
                 else{
                     dialog.innerHTML=''

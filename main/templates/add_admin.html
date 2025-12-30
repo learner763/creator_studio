@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Add People</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     {% load static %}
 </head>
 <style>
@@ -65,6 +66,7 @@
         overflow-y: scroll;
         scrollbar-width: none;
         height: 100dvh;
+        z-index:1;
     }
     #creator_img{
         width: 138px;height: 60px;margin-top: 23px;margin-bottom: 68px;
@@ -96,6 +98,7 @@
         display: flex;
         flex: 1;
         flex-direction: column;
+        width:100%;
     }
     .top_bar div label:first-of-type{
         color: #D5DBE6;
@@ -198,6 +201,40 @@
         font-weight: 400;
         align-items: center;
     }
+    #bar_button{
+        display:none;
+        border:none;
+        border-radius:5px;
+        background-color:white;
+        color:#CB102B;
+        margin-right:5px;
+        cursor:pointer;
+    }
+    select option{
+        color:black;
+    }
+    @media(max-width:1700px)
+    {
+        .nav_bar{
+            display:none;
+        }
+        #bar_button{
+            display:block;
+        }
+        .top_bar{
+            padding-left:10px;
+            padding-right:10px;
+        }
+        .add_msg{
+            margin: 30px 0px 46px 10px;
+        }
+        .details{
+            margin:0px 10px;
+        }
+        .buttons{
+            margin-right:10px;
+        }
+    }
 </style>
 <body>
     <dialog id="dialog"></dialog>
@@ -220,18 +257,19 @@
         </div>
         <div class="child">
             <div class="top_bar">
+                <button id="bar_button"><i class="fas fa-bars"></i></button>
                 <label>Add User</label>
                 <img onclick="localStorage.removeItem('email');window.location.href='/creator_studio_login'" style="cursor: pointer;margin-left: auto;cursor: pointer;" src="{% static 'Ellipse 8.png' %}" alt="">
                 <div  style="display: flex;flex-direction: column;cursor: pointer;">
                     <label style="cursor: pointer;" onclick="localStorage.removeItem('email');window.location.href='/creator_studio_login'" id="name"></label>
-                    <label style="cursor: pointer;" onclick="localStorage.removeItem('email');window.location.href='/creator_studio_login'">Log in as Admin</label>
+                    <label style="cursor: pointer;" onclick="localStorage.removeItem('email');window.location.href='/creator_studio_login'">Log Out</label>
                 </div>
             </div>
             <div class="add_msg">
                 <label>Add required information to add the user in the system</label>
             </div>
-            <div class="details" style="display: flex;">
-                <div style="display: flex;flex-direction: column;">
+            <div class="details" style="display: flex;overflow:scroll;scrollbar-width:none;">
+                <div style="display: flex;flex-direction: column;min-width:fit-content;margin-right: 20px;">
                     <label>Basic Details</label>
                     <label>Add required details</label>
                 </div>
@@ -285,6 +323,30 @@
         </div>
     </div>
     <script>
+        let bar_button=document.getElementById('bar_button')
+        bar_button.addEventListener('click',()=>
+        {
+            document.getElementsByClassName('nav_bar')[0].style.display='flex'
+            document.getElementsByClassName('nav_bar')[0].style.position='fixed'
+        })
+        window.addEventListener('resize',()=>
+        {
+            if(window.innerWidth>1700)
+            {
+                document.getElementsByClassName('nav_bar')[0].style.display='flex'
+                document.getElementsByClassName('nav_bar')[0].style.position='static'
+            }
+            else{
+                document.getElementsByClassName('nav_bar')[0].style.display='none'
+            }
+        })
+        document.addEventListener('click',(e)=>
+        {
+            if(e.target!==bar_button && e.target!==document.querySelectorAll('.top_bar i')[0]  && window.innerWidth<1701 && getComputedStyle(document.getElementsByClassName('nav_bar')[0]).display==='flex')
+            {
+                document.getElementsByClassName('nav_bar')[0].style.display='none'
+            }
+        })
         document.body.style.display='none'
         if(localStorage.getItem('email')===null){
             window.location.href='/creator_studio_login';
@@ -340,6 +402,7 @@
                     body:JSON.stringify({
                         email:email.value,
                         password:password.value,
+                        confirmpassword:confirmpassword.value,
                         fullname:fullname.value,
                         source:source.value,
                         account:account_status.value,

@@ -176,7 +176,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        width:-webkit-fill-available;
+        width:auto;
     }
     .actual_records input{
         width: 20px;
@@ -189,29 +189,33 @@
     .actual_records{
         border:none !important;
     }
+    .actual_records{
+        overflow:scroll;
+        scrollbar-width:none;
+    }
     .actual_records label:first-of-type{
-        width: 124px;
+        min-width: 124px;
     }
     .actual_records label:nth-of-type(2){
-        width: 182px;
+        min-width: 182px;
     }
     .actual_records label:nth-of-type(3){
-        width: 101px;
+        min-width: 101px;
     }
     .actual_records label:nth-of-type(4){
-        width: 130px;
+        min-width: 130px;
     }
     .actual_records label:nth-of-type(5){
-        width: 102px;
+        min-width: 102px;
     }
     .actual_records label:nth-of-type(6){
-        width: 116px;
+        min-width: 116px;
     }
     .actual_records label:nth-of-type(7){
-        width: 111px;
+        min-width: 111px;
     }
     .actual_records label:nth-of-type(8){
-        width: 193px;
+        min-width: 193px;
     }
     .scroll_data{
         height: 68px;
